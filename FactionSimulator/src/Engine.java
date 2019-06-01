@@ -60,6 +60,7 @@ public class Engine implements Runnable{
 	public void run() {
 		
 		//map.create
+		//creates a test town @50,50
 		
 		//start of game loop
 		while(running) {
@@ -83,13 +84,10 @@ public class Engine implements Runnable{
 		
 	}
 	
-	private double x = 0;
-	
 	//updates game logic
 	private void update() {
 		//World class accessed here
-		x += 10;
-		//collision, if battle run from here
+		//collision, if battle run from here or if unit hits town update that towns faction or not
 	}
 	
 	//clears and updates screen
@@ -103,10 +101,9 @@ public class Engine implements Runnable{
 	
 	//draw graphics here
 	private void draw(Graphics2D g) {
-		g.setColor(Color.BLUE);
-		g.fillRect((int)x, 50, 150, 100);
-		g.setColor(Color.RED);
-		g.fillOval(200, 200, 100, 100);
+		Town current = Map.getTesttown();
+		g.setColor(Color.GRAY);
+		g.fillRect(current.x, current.y, 200, 200);
 	}
 
 }
