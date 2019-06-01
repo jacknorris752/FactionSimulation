@@ -1,33 +1,58 @@
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Map {
 
+	private static int difference = 200;
+	
+	
 	private static ArrayList<Town> towns = new ArrayList<Town>();	//needs to be a list
 	
 	
 	/*
-	 * 
-	 *TODO: create a list of towns 
-	 * perhaps throw in one wierd faction to test detection?
+	 *TODO: Stop towns from spawning over the edge
 	 */
 	
-	//creates a test town and returns it
-	public static Town getTesttown() {
-		Town test = new Town(50,50);
-		return test;
+	public static void generateMap(int amount) {
+		
+		//create new map with "amount" of towns
+		for(int i = 0; i < amount; i++) {	
+			Boolean acceptable = false;
+			Random r = new Random();
+			int xResult = 0,yResult = 0;
+			while(!acceptable) {
+				xResult = r.nextInt(Engine.WIDTH-1)+1;
+				yResult = r.nextInt(Engine.HEIGHT-1)+1;
+				//checks that current results are not too similar to previous Towns
+				for(Town town : towns) {
+					if(town.x < xResult + difference) {
+						if(town.y < yResult + difference) {
+							break;
+						}
+					}
+					if(town.x > xResult - difference) {
+						if(town.y > yResult - difference) {
+							break;
+						}
+					}
+				}
+				acceptable = true;
+			}
+			
+			towns.add(new Town(xResult,yResult));	
+		}
+		
+		//towns.add(testTown());		//adds testTown
 	}
 	
-	public static void generateMap(int amount) {
-		//create new map with "amount" of towns
-		for(int i = 0; i < amount; i++) {
-			towns.add(new Town((50*(i+1)),50));	
-		}
+	//Adds random town with new faction to test "Color" detection in draw
+	public static Town testTown() {
 		Faction yes = new Faction();
 		yes.myColor = Color.BLUE;
 		Town newTown = new Town(50,100);
 		newTown.updateFaction(yes);
-		towns.add(newTown);
+		return newTown;
 	}
 	
 	public static ArrayList<Town> getTowns() {

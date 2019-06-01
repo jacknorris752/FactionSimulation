@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 
 public class Engine implements Runnable{
 
-	public final int WIDTH = 1000;
-	public final int HEIGHT = 800;
+	public static final int WIDTH = 1000;
+	public static final int HEIGHT = 800;
 	
 	final int msBetweenFrames = 500;
 	
@@ -115,6 +115,14 @@ public class Engine implements Runnable{
 		
 		
 		
+	}
+	
+	
+	public static boolean collisionCheck(Object obj1, Object obj2) {
+		return true;
+		
+		//figures out the two objects centre points and then builds a virtual 4 point box around this based on the width and height of the object.
+		//if the two objects intersect then return true otherwise retur false
 	}
 
 }
