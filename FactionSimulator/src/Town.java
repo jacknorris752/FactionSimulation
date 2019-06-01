@@ -5,15 +5,15 @@ public class Town {
 	public int x,y;
 	
 	public Town(int ix, int iy) {
-		x = ix;
-		y = iy;
+		this.x = ix;
+		this.y = iy;
 	}
 	
 	public Faction whatFaction() {
-		return faction;
+		return this.faction;
 	}
 	
 	public void updateFaction(Faction fact) {
-		faction = fact;
+		this.faction = fact;
 	}
 }

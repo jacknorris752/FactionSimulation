@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 
 public class Engine implements Runnable{
 
-	final int WIDTH = 1000;
-	final int HEIGHT = 800;
+	public final int WIDTH = 1000;
+	public final int HEIGHT = 800;
 	
 	final int msBetweenFrames = 500;
 	
@@ -21,6 +21,11 @@ public class Engine implements Runnable{
 	//entry point
 	public static void main(String[] args) {
 		//collect simulation details
+		
+		//generates new map
+		Map.generateMap(3);
+		
+		
 		Engine ex = new Engine();
 		new Thread(ex).start();
 		//repeat?
@@ -58,9 +63,6 @@ public class Engine implements Runnable{
 	
 	@Override
 	public void run() {
-		
-		//map.create
-		//creates a test town @50,50
 		
 		//start of game loop
 		while(running) {
@@ -101,9 +103,18 @@ public class Engine implements Runnable{
 	
 	//draw graphics here
 	private void draw(Graphics2D g) {
-		Town current = Map.getTesttown();
-		g.setColor(Color.GRAY);
-		g.fillRect(current.x, current.y, 200, 200);
+		g.setColor(Color.RED);
+		for(Town town : Map.getTowns()) {
+			if(town.whatFaction() == null) {
+				g.setColor(Color.LIGHT_GRAY);
+			}else {
+				g.setColor(town.whatFaction().myColor);
+			}
+			g.fillRect(town.x, town.y, 40, 40);
+		}
+		
+		
+		
 	}
 
 }

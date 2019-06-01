@@ -1,8 +1,9 @@
-import java.util.List;
+import java.awt.Color;
+import java.util.ArrayList;
 
 public class Map {
 
-	private static List<Town> towns;	//needs to be a list
+	private static ArrayList<Town> towns = new ArrayList<Town>();	//needs to be a list
 	
 	
 	/*
@@ -17,9 +18,19 @@ public class Map {
 		return test;
 	}
 	
+	public static void generateMap(int amount) {
+		//create new map with "amount" of towns
+		for(int i = 0; i < amount; i++) {
+			towns.add(new Town((50*(i+1)),50));	
+		}
+		Faction yes = new Faction();
+		yes.myColor = Color.BLUE;
+		Town newTown = new Town(50,100);
+		newTown.updateFaction(yes);
+		towns.add(newTown);
+	}
 	
-	
-	/*public static List<Town> getTowns() {
-		returns list of towns
-	}*/
+	public static ArrayList<Town> getTowns() {
+		return towns;
+	}
 }
