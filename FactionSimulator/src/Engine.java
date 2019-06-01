@@ -110,19 +110,16 @@ public class Engine implements Runnable{
 			}else {
 				g.setColor(town.whatFaction().myColor);
 			}
-			g.fillRect(town.x, town.y, 40, 40);
+			g.fillRect(town.x, town.y, Town.size, Town.size);
 		}
 		
-		
-		
 	}
-	
 	
 	public static boolean collisionCheck(Object obj1, Object obj2) {
 		return true;
 		
 		//figures out the two objects centre points and then builds a virtual 4 point box around this based on the width and height of the object.
-		//if the two objects intersect then return true otherwise retur false
+		//if the two objects intersect then return true otherwise return false
 	}
 
 }

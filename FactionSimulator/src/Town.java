@@ -3,6 +3,7 @@ public class Town {
 
 	private Faction faction;
 	public int x,y;
+	public static final int size = 40;
 	
 	public Town(int ix, int iy) {
 		this.x = ix;
