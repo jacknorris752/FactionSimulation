@@ -11,8 +11,8 @@ public class Unit {
 	 */
 	
 
-	private Faction myFaction;
-	private int myX,myY;
+	public Faction myFaction;
+	public int myX,myY;
 	private int moveRate; //how fast a unit can move per turn probably faction based?
 	public static final int size = 20;
 	private final int stepSize = 5;
@@ -35,8 +35,8 @@ public class Unit {
 		}
 		//movement in here
 		//my values go to target values in increments of "stepSize"
-		System.out.println("I am at: " + this.myX + ", " + this.myY +
-				"\n MY target is at: " + target.x + ", " + target.y);
+		/*System.out.println("I am at: " + this.myX + ", " + this.myY +
+				"\n MY target is at: " + target.x + ", " + target.y);*/
 		
 	}
 	

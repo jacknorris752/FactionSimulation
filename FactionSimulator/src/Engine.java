@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -25,15 +26,20 @@ public class Engine implements Runnable{
 		//generates new map
 		Map.generateMap(3);
 		
+		consoleStart();
 		
 		Engine ex = new Engine();
 		new Thread(ex).start();
 		//repeat?
 	}
 	
-	//temp method
-	private void consoleStart() {
+	//temp method whilst Menu is in development
+	private static void consoleStart() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Faction number: Please Select a number between 2 and 4");
+		int howMany = sc.nextInt();
 		
+		World.createFactions(howMany);
 	}
 
 	//handles JFrame and canvas initialisation
@@ -97,6 +103,9 @@ public class Engine implements Runnable{
 		//collision, if battle run from here or if unit hits town update that towns faction or not
 		
 		//call update in each unit
+		for(Unit unit : World.getAllUnits()) {
+			unit.update();
+		}
 	}
 	
 	//clears and updates screen
@@ -110,7 +119,6 @@ public class Engine implements Runnable{
 	
 	//draw graphics here
 	private void draw(Graphics2D g) {
-		g.setColor(Color.RED);
 		for(Town town : Map.getTowns()) {
 			if(town.whatFaction() == null) {
 				g.setColor(Color.LIGHT_GRAY);
@@ -120,9 +128,14 @@ public class Engine implements Runnable{
 			g.fillRect(town.x, town.y, Town.size, Town.size);
 		}
 		
+		for(Unit unit : World.getAllUnits()) {
+			g.setColor(unit.myFaction.myColor);
+			g.fillOval(unit.myX, unit.myY, unit.size, unit.size);
+		}
+		
 	}
 	
-	private double distance(double x1, double y1, double x2, double y2) {
+	public static double distance(double x1, double y1, double x2, double y2) {
 		
 		double x = Math.pow(x2 - x1, 2);
 		double y = Math.pow(y2 - y1, 2);

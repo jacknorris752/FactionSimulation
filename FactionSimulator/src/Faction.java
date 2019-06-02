@@ -17,4 +17,12 @@ public class Faction {
 		this.myColor = col;
 	}
 	
+	public void addUnit(int x, int y) {
+		myUnits.add(new Unit(this,x,y));		//creating a new unit
+	}
+	
+	public ArrayList<Unit> getFactionUnits(){
+		return myUnits;
+	}
+	
 }
