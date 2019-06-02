@@ -30,6 +30,11 @@ public class Engine implements Runnable{
 		new Thread(ex).start();
 		//repeat?
 	}
+	
+	//temp method
+	private void consoleStart() {
+		
+	}
 
 	//handles JFrame and canvas initialisation
 	public Engine() {
@@ -90,6 +95,8 @@ public class Engine implements Runnable{
 	private void update() {
 		//World class accessed here
 		//collision, if battle run from here or if unit hits town update that towns faction or not
+		
+		//call update in each unit
 	}
 	
 	//clears and updates screen
@@ -121,7 +128,6 @@ public class Engine implements Runnable{
 		double y = Math.pow(y2 - y1, 2);
 		double dist = Math.sqrt(x + y);
 		return dist;
-		
 	}
 	
 	public static boolean collisionCheck(Object obj1, Object obj2) {

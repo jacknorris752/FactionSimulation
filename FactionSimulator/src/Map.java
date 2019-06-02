@@ -7,7 +7,7 @@ public class Map {
 	private static int difference = 200;
 	
 	
-	private static ArrayList<Town> towns = new ArrayList<Town>();	//needs to be a list
+	private static ArrayList<Town> towns = new ArrayList<Town>();
 	
 	
 	/*
@@ -49,8 +49,7 @@ public class Map {
 	
 	//Adds random town with new faction to test "Color" detection in draw
 	public static Town testTown() {
-		Faction yes = new Faction();
-		yes.myColor = Color.BLUE;
+		Faction yes = new Faction(Color.BLUE);
 		Town newTown = new Town(50,100);
 		newTown.updateFaction(yes);
 		return newTown;
