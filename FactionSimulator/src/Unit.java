@@ -6,7 +6,6 @@ public class Unit {
 	/*
 	 * 
 	 * TODO:
-	 * 		how to have an "update" method here?
 	 * 
 	 */
 	
@@ -29,11 +28,23 @@ public class Unit {
 		this.myY = y;
 	}
 	
-	public void update() {
+	public void tick() {
+		
 		if(target == null) {
 			search();
 		}
 		//movement in here
+		if(this.myX > target.x) {
+			this.myX -= stepSize;
+		}else {
+			this.myX += stepSize;
+		}
+		if(this.myY > target.y) {
+			this.myY -= stepSize;
+		}else {
+			this.myY += stepSize;
+		}
+		System.out.println(this.myX + this.myY);
 		//my values go to target values in increments of "stepSize"
 		/*System.out.println("I am at: " + this.myX + ", " + this.myY +
 				"\n MY target is at: " + target.x + ", " + target.y);*/

@@ -5,8 +5,7 @@ public class World {
 
 	/*
 	 * 
-	 * TODO: create units
-	 * 		 create factions
+	 * TODO:
 	 * 
 	 * 		needs to hold turns since last spawn for each faction
 	 * 
@@ -45,9 +44,11 @@ public class World {
 	}
 	
 	public static ArrayList<Unit> getAllUnits() {
+		allUnits.clear();
 		for(Faction fact : factions) {
 			allUnits.addAll(fact.getFactionUnits());
 		}
+		//System.out.println("I AM: " + allUnits.size());
 		return allUnits;
 	}
 	

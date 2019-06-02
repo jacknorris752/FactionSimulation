@@ -9,11 +9,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Engine implements Runnable{
+	
+	
+	/*
+	 * TODO:
+	 * 
+	 */
 
 	public static final int WIDTH = 1000;
 	public static final int HEIGHT = 800;
 	
-	final int msBetweenFrames = 500;
+	final double msBetweenFrames = 500;
 	
 	JFrame frame;
 	Canvas canvas;
@@ -24,9 +30,7 @@ public class Engine implements Runnable{
 		//collect simulation details
 		
 		//generates new map
-		Map.generateMap(3);
 		
-		consoleStart();
 		
 		Engine ex = new Engine();
 		new Thread(ex).start();
@@ -75,20 +79,25 @@ public class Engine implements Runnable{
 	@Override
 	public void run() {
 		
+		Map.generateMap(5);
+		
+		consoleStart();
+		
 		//start of game loop
 		while(running) {
 			double current = System.currentTimeMillis();
 			double elapsed = current - previous;
 			previous = current;
 			lag += elapsed;
-			//inputs
-			
+			System.out.println(lag);
 			//delay
 			while(lag >= msBetweenFrames) {
 				update();
 				lag -= msBetweenFrames;
 			}
+			
 			render();
+			
 		}
 	}
 
@@ -104,7 +113,8 @@ public class Engine implements Runnable{
 		
 		//call update in each unit
 		for(Unit unit : World.getAllUnits()) {
-			unit.update();
+			unit.tick();
+	
 		}
 	}
 	

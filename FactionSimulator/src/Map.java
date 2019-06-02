@@ -56,6 +56,7 @@ public class Map {
 	}
 	
 	public static ArrayList<Town> getTowns() {
+		//System.out.println("Towns: " + towns.size());
 		return towns;
 	}
 }
