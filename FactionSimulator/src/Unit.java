@@ -8,8 +8,8 @@ public class Unit {
 	
 	public Unit(Faction fact, int x, int y) {
 		this.myFaction = fact;
-		myX = x;
-		myY = y;
+		this.myX = x;
+		this.myY = y;
 	}
 	
 }

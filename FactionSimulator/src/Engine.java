@@ -115,6 +115,15 @@ public class Engine implements Runnable{
 		
 	}
 	
+	private double distance(double x1, double y1, double x2, double y2) {
+		
+		double x = Math.pow(x2 - x1, 2);
+		double y = Math.pow(y2 - y1, 2);
+		double dist = Math.sqrt(x + y);
+		return dist;
+		
+	}
+	
 	public static boolean collisionCheck(Object obj1, Object obj2) {
 		return true;
 		
