@@ -6,7 +6,6 @@ public class World {
 	/*
 	 * 
 	 * TODO: Needs to hold turns since last spawn for each faction
-	 * 
 	 * 		
 	 * 
 	 */

@@ -6,8 +6,8 @@ public class Faction {
 	/*
 	 * 
 	 * TODO: Turns for new unit
-	 * 		combat stats
-	 * 		
+	 * TODO: combat stats
+	 * TODO: LIST OF TOWNS OWNED? FOR SPAWNING? MAYBE DO THIS IN WORLD?
 	 */
 	
 	public Color myColor;

@@ -27,14 +27,16 @@ public class Engine implements Runnable{
 	
 	//entry point
 	public static void main(String[] args) {
-		//collect simulation details
+		//TODO: GET MENU WORKING
+		//Menu m = new Menu();
 		
-		//generates new map
-		
-		
+		//works for testing
+		startSim();
+	}
+	
+	public static void startSim() {
 		Engine ex = new Engine();
 		new Thread(ex).start();
-		//repeat?
 	}
 	
 	//temp method whilst Menu is in development
@@ -84,8 +86,10 @@ public class Engine implements Runnable{
 	@Override
 	public void run() {
 		
+		//TODO: GET HOW MANY TOWNS SOMEHOW? MAYBE RNG?
 		Map.generateMap(5);
 		
+		//TODO: Remove when ui works
 		consoleStart();
 		
 		//start of game loop
