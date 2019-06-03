@@ -12,7 +12,7 @@ public class Map {
 	
 	/*
 	 *TODO: Stop towns from spawning over the edge
-	 *		perhaps base difference between on centre points?
+	 *TODO:	Stop towns spawning too close to each other
 	 */
 	
 	public static void generateMap(int amount) {

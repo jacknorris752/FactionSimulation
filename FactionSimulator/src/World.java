@@ -5,9 +5,9 @@ public class World {
 
 	/*
 	 * 
-	 * TODO:
+	 * TODO: Needs to hold turns since last spawn for each faction
 	 * 
-	 * 		needs to hold turns since last spawn for each faction
+	 * 		
 	 * 
 	 */
 	
