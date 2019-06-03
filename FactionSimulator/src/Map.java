@@ -43,7 +43,7 @@ public class Map {
 			
 			towns.add(new Town(xResult,yResult));	
 		}
-		
+		System.out.println("Map.java: number of towns: " + towns.size());
 		//towns.add(testTown());		//adds testTown
 	}
 	

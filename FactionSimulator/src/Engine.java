@@ -45,6 +45,11 @@ public class Engine implements Runnable{
 		
 		World.createFactions(howMany);
 	}
+	
+	//temporary for taking towns
+	public static void takeTown(Town t,Faction fact) {
+		t.updateFaction(fact);
+	}
 
 	//handles JFrame and canvas initialisation
 	public Engine() {
@@ -89,7 +94,7 @@ public class Engine implements Runnable{
 			double elapsed = current - previous;
 			previous = current;
 			lag += elapsed;
-			System.out.println(lag);
+			//System.out.println(lag);
 			//delay
 			while(lag >= msBetweenFrames) {
 				update();

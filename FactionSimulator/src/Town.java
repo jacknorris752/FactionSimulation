@@ -16,5 +16,6 @@ public class Town {
 	
 	public void updateFaction(Faction fact) {
 		this.faction = fact;
+		System.out.println("Towns.java: New faction takeover");
 	}
 }

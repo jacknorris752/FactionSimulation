@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 
 public class Unit {
-	
-	
+
 	/*
 	 * 
 	 * TODO:
@@ -12,13 +11,10 @@ public class Unit {
 
 	public Faction myFaction;
 	public int myX,myY;
-	private int moveRate; //how fast a unit can move per turn probably faction based?
 	public static final int size = 20;
 	private final int stepSize = 5;
 	
 	private boolean alive = true;
-	
-	
 	
 	private Town target;		//this is where it wants to go
 	
@@ -33,7 +29,8 @@ public class Unit {
 		if(target == null) {
 			search();
 		}
-		//movement in here
+		
+		//move towards target
 		if(this.myX > target.x) {
 			this.myX -= stepSize;
 		}else {
@@ -44,39 +41,58 @@ public class Unit {
 		}else {
 			this.myY += stepSize;
 		}
-		System.out.println(this.myX + this.myY);
-		//my values go to target values in increments of "stepSize"
-		/*System.out.println("I am at: " + this.myX + ", " + this.myY +
-				"\n MY target is at: " + target.x + ", " + target.y);*/
+		
+		//take a town
+		if(Engine.distance(this.myX, this.myY, target.x, target.y) < 5.0) {
+			Engine.takeTown(target, myFaction);
+			System.out.println("YOU'RE MINE");
+			target = null;
+			//search();
+		}
 		
 	}
 	
+	//set target to closest town from Map.getTowns();
 	public void search() {
-		//set target to closest town from Map.getTowns();
 		
 		ArrayList<Town> temp = Map.getTowns();	//list of towns
 		Town closest = null;		//temporary closest value
 		double closestDistance = 0;
+		System.out.println("Unit.java: temp list is how long: " + temp.size());
 		
-		
-		if(closest == null) {
+		/*if(closest == null) {
 			double distance = Engine.distance(this.myX, this.myY, temp.get(0).x,temp.get(0).y);
 			closest = temp.get(0);
 			closestDistance = distance;
-		}
-		
+		}*/
 		
 		for(int i = 0; i < temp.size(); i++) {
+			System.out.println("Unit.java: Checking temp:" + i);
+			if(temp.get(i).whatFaction() == this.myFaction) {
+				System.out.println("We the same faction dawg");
+			}
 			double distance = Engine.distance(this.myX, this.myY, temp.get(i).x,temp.get(i).y);
-
-			if(distance < closestDistance) {
-				closest = temp.get(i);
-				closestDistance = distance;
+			System.out.println("Unit.java: I am " + distance + " away from target");
+			if(distance < closestDistance && temp.get(i).whatFaction() != this.myFaction || closest == null) {
+				if(temp.get(i).whatFaction() != this.myFaction) {
+					closest = temp.get(i);
+					closestDistance = distance;
+					System.out.println("Unit.java: New closest target");
+				}
+				
 			}
 		}
+		try {
+			target = closest;
+		}catch(Exception e) {
+			System.out.println("Unit.java: Failed to find new targer");
+		}
 		
-		target = closest;
+		if(target == null) {
+			search();
+			System.out.println("No new target set, trying again");
+		}
+		
+		
 	}
-	
-	
 }
