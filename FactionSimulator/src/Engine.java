@@ -11,10 +11,6 @@ import javax.swing.JPanel;
 public class Engine implements Runnable{
 	
 	
-	/*
-	 * TODO: Implement starting UI
-	 * 
-	 */
 
 	public static final int WIDTH = 1000;
 	public static final int HEIGHT = 800;
@@ -27,25 +23,12 @@ public class Engine implements Runnable{
 	
 	//entry point
 	public static void main(String[] args) {
-		//TODO: GET MENU WORKING
-		//Menu m = new Menu();
-		
-		//works for testing
-		startSim();
+		Menu m = new Menu();
 	}
 	
 	public static void startSim() {
 		Engine ex = new Engine();
 		new Thread(ex).start();
-	}
-	
-	//temp method whilst Menu is in development
-	private static void consoleStart() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Faction number: Please Select a number between 2 and 4");
-		int howMany = sc.nextInt();
-		
-		World.createFactions(howMany);
 	}
 	
 	//temporary for taking towns
@@ -88,9 +71,6 @@ public class Engine implements Runnable{
 		
 		//TODO: GET HOW MANY TOWNS SOMEHOW? MAYBE RNG?
 		Map.generateMap(5);
-		
-		//TODO: Remove when ui works
-		consoleStart();
 		
 		//start of game loop
 		while(running) {

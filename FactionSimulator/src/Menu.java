@@ -14,19 +14,21 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 
 
 
 public class Menu extends JFrame {
 	private JLabel ErrorTextLabel;
 	
+	private String[] col = new String[] {"Blue","Red","Green","Black","Yellow","Pink"};
 	private Color[] availableColors = new Color[] {Color.BLUE, Color.RED, Color.GREEN, Color.BLACK, Color.YELLOW, Color.PINK};
 	
-	public static void runMenu() {
-		
-	}
-	
 	public Menu() {
+		setAlwaysOnTop(true);
+		setSize(new Dimension(500, 300));
+		setPreferredSize(new Dimension(500, 300));
+		setMinimumSize(new Dimension(500, 300));
 		setTitle("FACTION SIMULATOR");
 		getContentPane().setLayout(new GridLayout(6, 1, 0, 0));
 		
@@ -55,8 +57,7 @@ public class Menu extends JFrame {
 		Faction1Panel.add(lblStats);
 		
 		JComboBox comboBox = new JComboBox();
-		//TODO: CHANGE TYPE TO "COLOR"
-		comboBox.setModel(new DefaultComboBoxModel(availableColors));
+		comboBox.setModel(new DefaultComboBoxModel(col));
 		Faction1Panel.add(comboBox);
 		//END OF FACTION 1
 		
@@ -77,7 +78,7 @@ public class Menu extends JFrame {
 		Faction2Panel.add(label);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(availableColors));
+		comboBox_1.setModel(new DefaultComboBoxModel(col));
 		Faction2Panel.add(comboBox_1);
 		//END OF FACTION 2
 		
@@ -99,7 +100,7 @@ public class Menu extends JFrame {
 		Faction3Panel.add(label_1);
 		
 		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setModel(new DefaultComboBoxModel(availableColors));
+		comboBox_2.setModel(new DefaultComboBoxModel(col));
 		Faction3Panel.add(comboBox_2);
 		//END OF FACTION 3
 		
@@ -121,7 +122,7 @@ public class Menu extends JFrame {
 		Faction4Panel.add(label_2);
 		
 		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setModel(new DefaultComboBoxModel(availableColors));
+		comboBox_3.setModel(new DefaultComboBoxModel(col));
 		Faction4Panel.add(comboBox_3);
 		//END OF FACTION 4
 		
@@ -145,11 +146,20 @@ public class Menu extends JFrame {
 				
 				//TODO: check colours are all different
 				//code here
+				//break if not
+				
+				//Convert colour selection to "Color" array
+				Color[] colorSelection = new Color[4];
+				colorSelection[0] = availableColors[comboBox.getSelectedIndex()];
+				colorSelection[1] = availableColors[comboBox_1.getSelectedIndex()];
+				colorSelection[2] = availableColors[comboBox_2.getSelectedIndex()];
+				colorSelection[3] = availableColors[comboBox_3.getSelectedIndex()];
 				
 				//start game
-				World.createFactions(howMany);
-				//TODO:close this window
-				//code here
+				World.createFactions(howMany,colorSelection);
+				Engine.startSim();
+				//close this window
+				setVisible(false);
 			}
 		});
 		InfoPanel.add(btnNewButton);
@@ -159,7 +169,8 @@ public class Menu extends JFrame {
 		
 		ErrorTextLabel = new JLabel("    error stuff");
 		InfoPanel.add(ErrorTextLabel);
-		//END OF INFO PANEL
+		
+		setVisible(true);
 	}
 	
 }

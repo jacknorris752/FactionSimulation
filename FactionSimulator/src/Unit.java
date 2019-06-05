@@ -13,6 +13,7 @@ public class Unit {
 	public int myX,myY;
 	public static final int size = 20;
 	private final int stepSize = 5;
+	//TODO: Make this a step size max so no more jittery movement
 	
 	private boolean alive = true;
 	

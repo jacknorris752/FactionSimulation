@@ -6,20 +6,20 @@ public class World {
 	/*
 	 * 
 	 * TODO: Needs to hold turns since last spawn for each faction
-	 * 		
+	 * 		maybe a tick here to spawn on turn
 	 * 
 	 */
 	
 	private static ArrayList<Faction> factions = new ArrayList<Faction>();
 	private static ArrayList<Unit> allUnits = new ArrayList<Unit>();
 	
-	public static void createFactions(int num) {
+	public static void createFactions(int num,Color[] cols) {
 		for(int i = 0; i < num; i++) {
 			
 			Color give = null;
 			int startX = 0,startY = 0;
 			
-			switch(i) {
+			/*switch(i) {
 			case 0: give = Color.RED;startX = 20; startY = 20;
 			break;
 			case 1: give = Color.BLUE;startX = Engine.WIDTH - 20; startY = 20;
@@ -27,6 +27,17 @@ public class World {
 			case 2: give = Color.GREEN;startX = 20; startY = Engine.HEIGHT - 20;
 			break;
 			case 3: give = Color.PINK;startX = Engine.WIDTH - 20; startY = Engine.HEIGHT - 20;
+			break;
+			}*/
+			
+			switch(i) {
+			case 0: give = cols[i]; startX = 20; startY = 20;
+			break;
+			case 1: give = cols[i]; startX = Engine.WIDTH - 20; startY = 20;
+			break;
+			case 2: give = cols[i]; startX = 20; startY = Engine.HEIGHT - 20;
+			break;
+			case 3: give = cols[i]; startX = Engine.WIDTH - 20; startY = Engine.HEIGHT - 20;
 			break;
 			}
 			
