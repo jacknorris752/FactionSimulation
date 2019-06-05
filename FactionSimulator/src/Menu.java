@@ -58,6 +58,7 @@ public class Menu extends JFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(col));
+		comboBox.setSelectedIndex(0);
 		Faction1Panel.add(comboBox);
 		//END OF FACTION 1
 		
@@ -69,16 +70,17 @@ public class Menu extends JFrame {
 		JLabel Fac2Label = new JLabel("    Faction_2");
 		Faction2Panel.add(Fac2Label);
 		
-		JTextField textField = new JTextField();
-		textField.setText("Faction Name");
-		textField.setColumns(20);
-		Faction2Panel.add(textField);
+		JTextField txtFactionName2 = new JTextField();
+		txtFactionName2.setText("Faction Name");
+		txtFactionName2.setColumns(20);
+		Faction2Panel.add(txtFactionName2);
 		
 		JLabel label = new JLabel("Stats");
 		Faction2Panel.add(label);
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setModel(new DefaultComboBoxModel(col));
+		comboBox_1.setSelectedIndex(1);
 		Faction2Panel.add(comboBox_1);
 		//END OF FACTION 2
 		
@@ -91,16 +93,17 @@ public class Menu extends JFrame {
 		Fac3Button.setSelected(true);
 		Faction3Panel.add(Fac3Button);
 		
-		JTextField textField_1 = new JTextField();
-		textField_1.setText("Faction Name");
-		textField_1.setColumns(20);
-		Faction3Panel.add(textField_1);
+		JTextField txtFactionName3 = new JTextField();
+		txtFactionName3.setText("Faction Name");
+		txtFactionName3.setColumns(20);
+		Faction3Panel.add(txtFactionName3);
 		
 		JLabel label_1 = new JLabel("Stats");
 		Faction3Panel.add(label_1);
 		
 		JComboBox comboBox_2 = new JComboBox();
 		comboBox_2.setModel(new DefaultComboBoxModel(col));
+		comboBox_2.setSelectedIndex(2);
 		Faction3Panel.add(comboBox_2);
 		//END OF FACTION 3
 		
@@ -113,16 +116,17 @@ public class Menu extends JFrame {
 		Fac4Button.setSelected(true);
 		Faction4Panel.add(Fac4Button);
 		
-		JTextField textField_2 = new JTextField();
-		textField_2.setText("Faction Name");
-		textField_2.setColumns(20);
-		Faction4Panel.add(textField_2);
+		JTextField txtFactionName4 = new JTextField();
+		txtFactionName4.setText("Faction Name");
+		txtFactionName4.setColumns(20);
+		Faction4Panel.add(txtFactionName4);
 		
 		JLabel label_2 = new JLabel("Stats");
 		Faction4Panel.add(label_2);
 		
 		JComboBox comboBox_3 = new JComboBox();
 		comboBox_3.setModel(new DefaultComboBoxModel(col));
+		comboBox_3.setSelectedIndex(3);
 		Faction4Panel.add(comboBox_3);
 		//END OF FACTION 4
 		
@@ -144,6 +148,13 @@ public class Menu extends JFrame {
 					howMany++;
 				}
 				
+				//collect Faction names
+				String[] factionNames = new String[4];
+				factionNames[0] = txtFactionName.getText();
+				factionNames[0] = txtFactionName2.getText();
+				factionNames[0] = txtFactionName3.getText();
+				factionNames[0] = txtFactionName4.getText();
+				
 				//TODO: check colours are all different
 				//code here
 				//break if not
@@ -156,7 +167,7 @@ public class Menu extends JFrame {
 				colorSelection[3] = availableColors[comboBox_3.getSelectedIndex()];
 				
 				//start game
-				World.createFactions(howMany,colorSelection);
+				World.createFactions(howMany,factionNames,colorSelection);
 				Engine.startSim();
 				//close this window
 				setVisible(false);

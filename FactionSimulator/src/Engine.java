@@ -70,7 +70,7 @@ public class Engine implements Runnable{
 	public void run() {
 		
 		//TODO: GET HOW MANY TOWNS SOMEHOW? MAYBE RNG?
-		Map.generateMap(5);
+		Map.generateMap(12);
 		
 		//start of game loop
 		while(running) {
@@ -100,10 +100,12 @@ public class Engine implements Runnable{
 		//World class accessed here
 		//collision, if battle run from here or if unit hits town update that towns faction or not
 		
+		//update World
+		World.tick();
+		
 		//call update in each unit
 		for(Unit unit : World.getAllUnits()) {
 			unit.tick();
-	
 		}
 	}
 	

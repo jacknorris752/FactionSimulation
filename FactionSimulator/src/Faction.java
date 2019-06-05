@@ -7,14 +7,18 @@ public class Faction {
 	 * 
 	 * TODO: Turns for new unit
 	 * TODO: combat stats
-	 * TODO: LIST OF TOWNS OWNED? FOR SPAWNING? MAYBE DO THIS IN WORLD?
+	 * TODO: LIST OF TOWNS OWNED? SHOULD BE DONE HERE, Every add must add but how would take away when lost?
 	 */
 	
+	public String name;
 	public Color myColor;
+	public int turnsToSpawn;
 	private ArrayList<Unit> myUnits = new ArrayList<Unit>();
 	
-	public Faction(Color col) {
+	public Faction(String name,Color col,int turns) {
+		this.name = name;
 		this.myColor = col;
+		this.turnsToSpawn = turns;
 	}
 	
 	public void addUnit(int x, int y) {

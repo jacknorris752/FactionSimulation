@@ -4,7 +4,7 @@ public class Unit {
 
 	/*
 	 * 
-	 * TODO: Reqrite search function
+	 * TODO: Rewrite search function so that units don't go for the "nearest" but chooses from the top 3 nearest? avoids all units going to the same on
 	 * 
 	 */
 	
@@ -27,7 +27,7 @@ public class Unit {
 	
 	public void tick() {
 		
-		if(target == null) {
+		if(target == null || target.whatFaction() == this.myFaction) {
 			search();
 		}
 		
@@ -46,7 +46,6 @@ public class Unit {
 		//take a town
 		if(Engine.distance(this.myX, this.myY, target.x, target.y) < 5.0) {
 			Engine.takeTown(target, myFaction);
-			System.out.println("YOU'RE MINE");
 			target = null;
 			//search();
 		}
@@ -59,7 +58,7 @@ public class Unit {
 		ArrayList<Town> temp = Map.getTowns();	//list of towns
 		Town closest = null;		//temporary closest value
 		double closestDistance = 0;
-		System.out.println("Unit.java: temp list is how long: " + temp.size());
+		//System.out.println("Unit.java: temp list is how long: " + temp.size());
 		
 		/*if(closest == null) {
 			double distance = Engine.distance(this.myX, this.myY, temp.get(0).x,temp.get(0).y);
@@ -68,17 +67,14 @@ public class Unit {
 		}*/
 		
 		for(int i = 0; i < temp.size(); i++) {
-			System.out.println("Unit.java: Checking temp:" + i);
-			if(temp.get(i).whatFaction() == this.myFaction) {
-				System.out.println("We the same faction dawg");
-			}
+			//System.out.println("Unit.java: Checking temp:" + i);
 			double distance = Engine.distance(this.myX, this.myY, temp.get(i).x,temp.get(i).y);
-			System.out.println("Unit.java: I am " + distance + " away from target");
+			//System.out.println("Unit.java: I am " + distance + " away from target");
 			if(distance < closestDistance && temp.get(i).whatFaction() != this.myFaction || closest == null) {
 				if(temp.get(i).whatFaction() != this.myFaction) {
 					closest = temp.get(i);
 					closestDistance = distance;
-					System.out.println("Unit.java: New closest target");
+					//System.out.println("Unit.java: New closest target");
 				}
 				
 			}
@@ -86,12 +82,12 @@ public class Unit {
 		try {
 			target = closest;
 		}catch(Exception e) {
-			System.out.println("Unit.java: Failed to find new targer");
+			//System.out.println("Unit.java: Failed to find new targer");
 		}
 		
 		if(target == null) {
 			search();
-			System.out.println("No new target set, trying again");
+			//System.out.println("No new target set, trying again");
 		}
 		
 		

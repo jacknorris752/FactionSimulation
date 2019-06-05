@@ -47,14 +47,6 @@ public class Map {
 		//towns.add(testTown());		//adds testTown
 	}
 	
-	//Adds random town with new faction to test "Color" detection in draw
-	public static Town testTown() {
-		Faction yes = new Faction(Color.BLUE);
-		Town newTown = new Town(50,100);
-		newTown.updateFaction(yes);
-		return newTown;
-	}
-	
 	public static ArrayList<Town> getTowns() {
 		//System.out.println("Towns: " + towns.size());
 		return towns;
