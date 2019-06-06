@@ -25,6 +25,7 @@ public class Unit {
 		this.myY = y;
 	}
 	
+	//tick is called once per game cycle
 	public void tick() {
 		
 		if(target == null || target.whatFaction() == this.myFaction) {

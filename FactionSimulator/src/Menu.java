@@ -15,16 +15,23 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
+import javax.swing.JTextArea;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.border.BevelBorder;
 
 
 
 public class Menu extends JFrame {
-	private JLabel ErrorTextLabel;
 	
 	private String[] col = new String[] {"Blue","Red","Green","Black","Yellow","Pink"};
 	private Color[] availableColors = new Color[] {Color.BLUE, Color.RED, Color.GREEN, Color.BLACK, Color.YELLOW, Color.PINK};
+	private boolean validColours = true;
+	private static JTextArea errorTextArea;
 	
 	public Menu() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setAlwaysOnTop(true);
 		setSize(new Dimension(500, 300));
 		setPreferredSize(new Dimension(500, 300));
@@ -42,6 +49,7 @@ public class Menu extends JFrame {
 		
 		//FACTION 1
 		JPanel Faction1Panel = new JPanel();
+		Faction1Panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		getContentPane().add(Faction1Panel);
 		Faction1Panel.setLayout(new GridLayout(0, 4, 0, 0));
 		
@@ -64,6 +72,7 @@ public class Menu extends JFrame {
 		
 		//FACTION 2
 		JPanel Faction2Panel = new JPanel();
+		Faction2Panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		getContentPane().add(Faction2Panel);
 		Faction2Panel.setLayout(new GridLayout(0, 4, 0, 0));
 		
@@ -86,6 +95,7 @@ public class Menu extends JFrame {
 		
 		//FACTION 3
 		JPanel Faction3Panel = new JPanel();
+		Faction3Panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		getContentPane().add(Faction3Panel);
 		Faction3Panel.setLayout(new GridLayout(0, 4, 0, 0));
 		
@@ -109,6 +119,7 @@ public class Menu extends JFrame {
 		
 		//FACTION 4
 		JPanel Faction4Panel = new JPanel();
+		Faction4Panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		getContentPane().add(Faction4Panel);
 		Faction4Panel.setLayout(new GridLayout(0, 4, 0, 0));
 		
@@ -132,8 +143,14 @@ public class Menu extends JFrame {
 		
 		//INFO PANEL
 		JPanel InfoPanel = new JPanel();
+		InfoPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		getContentPane().add(InfoPanel);
-		InfoPanel.setLayout(new GridLayout(0, 4, 0, 0));
+		GridBagLayout gbl_InfoPanel = new GridBagLayout();
+		gbl_InfoPanel.columnWidths = new int[]{121, 121, 121, 0};
+		gbl_InfoPanel.rowHeights = new int[]{43, 0};
+		gbl_InfoPanel.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_InfoPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		InfoPanel.setLayout(gbl_InfoPanel);
 		
 		JButton btnNewButton = new JButton("START");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -155,33 +172,78 @@ public class Menu extends JFrame {
 				factionNames[0] = txtFactionName3.getText();
 				factionNames[0] = txtFactionName4.getText();
 				
-				//TODO: check colours are all different
-				//code here
-				//break if not
-				
 				//Convert colour selection to "Color" array
 				Color[] colorSelection = new Color[4];
 				colorSelection[0] = availableColors[comboBox.getSelectedIndex()];
 				colorSelection[1] = availableColors[comboBox_1.getSelectedIndex()];
-				colorSelection[2] = availableColors[comboBox_2.getSelectedIndex()];
-				colorSelection[3] = availableColors[comboBox_3.getSelectedIndex()];
 				
-				//start game
-				World.createFactions(howMany,factionNames,colorSelection);
-				Engine.startSim();
-				//close this window
-				setVisible(false);
+				//if factions are not being used colour value is null
+				if(Fac3Button.isSelected()) {
+					colorSelection[2] = availableColors[comboBox_2.getSelectedIndex()];
+				}else {
+					colorSelection[2] = null;
+				}
+				if(Fac4Button.isSelected()) {
+					colorSelection[3] = availableColors[comboBox_3.getSelectedIndex()];
+				}else {
+					colorSelection[3] = null;
+				}
+				
+				
+				//check colours are all different
+				for(Color col : colorSelection) {
+					int i = 0;
+					if(col == colorSelection[0]) {
+						i++;
+					}
+					if(col == colorSelection[1]) {
+						i++;
+					}
+					if(col == colorSelection[2] && colorSelection[2] != null) {
+						i++;
+					}
+					if(col == colorSelection[3] && colorSelection[3] != null) {
+						i++;
+					}
+					if(i > 1) {
+						validColours = false;
+						errorMessage("Each faction must have a different color");
+						break;
+					}
+				}
+				
+				if(validColours) {
+					//start game
+					World.createFactions(howMany,factionNames,colorSelection);
+					Engine.startSim();
+					//close this window
+					setVisible(false);
+				}
 			}
 		});
-		InfoPanel.add(btnNewButton);
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton.gridx = 0;
+		gbc_btnNewButton.gridy = 0;
+		InfoPanel.add(btnNewButton, gbc_btnNewButton);
 		
-		JSeparator separator = new JSeparator();
-		InfoPanel.add(separator);
-		
-		ErrorTextLabel = new JLabel("    error stuff");
-		InfoPanel.add(ErrorTextLabel);
+		errorTextArea = new JTextArea();
+		errorTextArea.setRows(4);
+		errorTextArea.setEditable(false);
+		GridBagConstraints gbc_errorTextArea = new GridBagConstraints();
+		gbc_errorTextArea.gridwidth = 2;
+		gbc_errorTextArea.insets = new Insets(0, 0, 0, 5);
+		gbc_errorTextArea.fill = GridBagConstraints.HORIZONTAL;
+		gbc_errorTextArea.gridx = 1;
+		gbc_errorTextArea.gridy = 0;
+		InfoPanel.add(errorTextArea, gbc_errorTextArea);
 		
 		setVisible(true);
+	}
+	
+	public static void errorMessage(String msg) {
+		errorTextArea.setText(msg);
 	}
 	
 }

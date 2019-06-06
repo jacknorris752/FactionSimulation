@@ -39,7 +39,7 @@ public class Engine implements Runnable{
 	//handles JFrame and canvas initialisation
 	public Engine() {
 		frame = new JFrame("Faction Simulator");
-		
+		frame.setAlwaysOnTop(true);
 		JPanel panel = (JPanel) frame.getContentPane();
 	    panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 	    panel.setLayout(null);
