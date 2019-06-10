@@ -30,11 +30,6 @@ public class Engine implements Runnable{
 		Engine ex = new Engine();
 		new Thread(ex).start();
 	}
-	
-	//temporary for taking towns
-	public static void takeTown(Town t,Faction fact) {
-		t.updateFaction(fact);
-	}
 
 	//handles JFrame and canvas initialisation
 	public Engine() {
@@ -135,20 +130,12 @@ public class Engine implements Runnable{
 		}
 		
 	}
-	
+
 	public static double distance(double x1, double y1, double x2, double y2) {
-		
 		double x = Math.pow(x2 - x1, 2);
 		double y = Math.pow(y2 - y1, 2);
 		double dist = Math.sqrt(x + y);
 		return dist;
-	}
-	
-	public static boolean collisionCheck(Object obj1, Object obj2) {
-		return true;
-		
-		//figures out the two objects centre points and then builds a virtual 4 point box around this based on the width and height of the object.
-		//if the two objects intersect then return true otherwise return false
 	}
 
 }

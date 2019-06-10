@@ -5,8 +5,8 @@ import java.util.Random;
 public class World {
 
 	/*
-	 * 
-	 * TODO: Needs to hold turns since last spawn for each faction
+	 * TODO: maybe each town held will generate "resource" to build new units?
+	 * build turns in factions is how efficient that faction may be lol
 	 * 
 	 */
 	
@@ -14,32 +14,35 @@ public class World {
 	private static ArrayList<Unit> allUnits = new ArrayList<Unit>();
 	private static int[] turnCounter = new int[] {0,0,0,0};
 	
+	//TODO: if two factions created spawn on opposite sides, if 3 do a triangle and if 4 do square
 	public static void createFactions(int num,String[] names,Color[] cols) {
 		for(int i = 0; i < num; i++) {
 			
 			Color give = null;
 			int startX = 0,startY = 0;
 			
+			
+			//TODO:find better way to designate staring positions
 			switch(i) {
-			case 0: give = cols[i]; startX = 20; startY = 20;
+			case 0: startX = 20; startY = 20;
 			break;
-			case 1: give = cols[i]; startX = Engine.WIDTH - 20; startY = 20;
+			case 1: startX = Engine.WIDTH - 20; startY = 20;
 			break;
-			case 2: give = cols[i]; startX = 20; startY = Engine.HEIGHT - 20;
+			case 2: startX = 20; startY = Engine.HEIGHT - 20;
 			break;
-			case 3: give = cols[i]; startX = Engine.WIDTH - 20; startY = Engine.HEIGHT - 20;
+			case 3: startX = Engine.WIDTH - 20; startY = Engine.HEIGHT - 20;
 			break;
 			}
 			
-			
 			//last value is just for testing LOWEST THIS SHOULD BE IS AROUND 50
-			factions.add(new Faction(names[i],give,50));
+			factions.add(new Faction(names[i],cols[i],50));
 			factions.get(i).addUnit(startX, startY);
 				
 		}
 	}
 	
 	//Word tick
+	//TODO: Base tick up based on how many bases
 	public static void tick() {
 		
 		for(int i=0; i<factions.size();i++) {
@@ -53,7 +56,7 @@ public class World {
 			
 			if(temp.size() != 0) {
 				turnCounter[i] += 1;
-				turn();
+				//turn();
 			}
 			
 			if(factions.get(i).turnsToSpawn == turnCounter[i] && temp.size() != 0) {
@@ -68,6 +71,7 @@ public class World {
 				turnCounter[i] = 0;
 			}
 		}
+		turn();
 	}
 	
 	public static void turn() {

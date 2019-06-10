@@ -5,7 +5,6 @@ public class Faction {
 	
 	/*
 	 * 
-	 * TODO: Turns for new unit
 	 * TODO: combat stats
 	 * TODO: LIST OF TOWNS OWNED? SHOULD BE DONE HERE, Every add must add but how would take away when lost?
 	 */

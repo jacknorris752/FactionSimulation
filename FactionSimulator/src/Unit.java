@@ -5,7 +5,7 @@ public class Unit {
 	/*
 	 * 
 	 * TODO: Rewrite search function so that units don't go for the "nearest" but chooses from the top 3 nearest? avoids all units going to the same on
-	 * 
+	 * TODO: if already friendly get new
 	 */
 	
 
@@ -46,7 +46,7 @@ public class Unit {
 		
 		//take a town
 		if(Engine.distance(this.myX, this.myY, target.x, target.y) < 5.0) {
-			Engine.takeTown(target, myFaction);
+			Battle.takeTown(target, myFaction);
 			target = null;
 			//search();
 		}
@@ -72,7 +72,8 @@ public class Unit {
 			double distance = Engine.distance(this.myX, this.myY, temp.get(i).x,temp.get(i).y);
 			//System.out.println("Unit.java: I am " + distance + " away from target");
 			if(distance < closestDistance && temp.get(i).whatFaction() != this.myFaction || closest == null) {
-				if(temp.get(i).whatFaction() != this.myFaction) {
+				//TODO: experimental seccond condition
+				if(temp.get(i).whatFaction() != this.myFaction && temp.get(i) != target) {
 					closest = temp.get(i);
 					closestDistance = distance;
 					//System.out.println("Unit.java: New closest target");

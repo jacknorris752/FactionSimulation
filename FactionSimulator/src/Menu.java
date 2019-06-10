@@ -20,8 +20,13 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.border.BevelBorder;
+import java.awt.Font;
 
-
+/*
+ * TODO: Stat buttons that open new windows for that specific factions stats?
+ * 	^^ include random button to generate random stats
+ * TODO: Fix bug if pick factions 1,2 and 4
+ */
 
 public class Menu extends JFrame {
 	
@@ -44,6 +49,7 @@ public class Menu extends JFrame {
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblFactionSimulator = new JLabel("FACTION SIMULATOR");
+		lblFactionSimulator.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblFactionSimulator.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblFactionSimulator);
 		
@@ -57,12 +63,20 @@ public class Menu extends JFrame {
 		Faction1Panel.add(Fac1Label);
 		
 		JTextField txtFactionName = new JTextField();
-		txtFactionName.setText("Faction Name");
+		txtFactionName.setToolTipText("Faction Name");
+		txtFactionName.setText("Faction_1");
 		Faction1Panel.add(txtFactionName);
 		txtFactionName.setColumns(20);
 		
-		JLabel lblStats = new JLabel("Stats");
-		Faction1Panel.add(lblStats);
+		JButton facStatButton = new JButton("Faction Stats");
+		facStatButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//TODO: YES
+				statMenu();
+				//faction = statMenu();
+			}
+		});
+		Faction1Panel.add(facStatButton);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(col));
@@ -80,7 +94,8 @@ public class Menu extends JFrame {
 		Faction2Panel.add(Fac2Label);
 		
 		JTextField txtFactionName2 = new JTextField();
-		txtFactionName2.setText("Faction Name");
+		txtFactionName2.setToolTipText("Faction Name");
+		txtFactionName2.setText("Faction_2");
 		txtFactionName2.setColumns(20);
 		Faction2Panel.add(txtFactionName2);
 		
@@ -104,7 +119,8 @@ public class Menu extends JFrame {
 		Faction3Panel.add(Fac3Button);
 		
 		JTextField txtFactionName3 = new JTextField();
-		txtFactionName3.setText("Faction Name");
+		txtFactionName3.setToolTipText("Faction Name");
+		txtFactionName3.setText("Faction_3");
 		txtFactionName3.setColumns(20);
 		Faction3Panel.add(txtFactionName3);
 		
@@ -128,7 +144,8 @@ public class Menu extends JFrame {
 		Faction4Panel.add(Fac4Button);
 		
 		JTextField txtFactionName4 = new JTextField();
-		txtFactionName4.setText("Faction Name");
+		txtFactionName4.setToolTipText("Faction Name");
+		txtFactionName4.setText("Faction_4");
 		txtFactionName4.setColumns(20);
 		Faction4Panel.add(txtFactionName4);
 		
@@ -244,6 +261,23 @@ public class Menu extends JFrame {
 	
 	public static void errorMessage(String msg) {
 		errorTextArea.setText(msg);
+	}
+	
+	//TODO: New window that pops up adjust variables of given faction
+	//TODO: needs return type faction
+	public void statMenu() {
+		JFrame jf = new JFrame();
+		jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); //TODO: change this for the love of fuck
+		jf.setAlwaysOnTop(true);
+		jf.setSize(new Dimension(200, 200));
+		jf.setPreferredSize(new Dimension(200, 200));
+		jf.setMinimumSize(new Dimension(200, 200));
+		jf.setTitle("stats");
+		
+		JPanel panel = new JPanel();
+		jf.getContentPane().add(panel);
+		panel.setLayout(new BorderLayout(0, 0));
+		jf.setVisible(true);
 	}
 	
 }
